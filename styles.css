@@ -1,0 +1,654 @@
+/* =============================== */
+/* Global Reset & Default Styling */
+/* =============================== */
+
+/* Reset margins, paddings, and set default box sizing and font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* =============================== */
+/* Top Navigation Bar Styling */
+/* =============================== */
+
+/* Top navigation container with responsive spacing and subtle shadow */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5vw 3vw; /* Responsive padding */
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds depth */
+  width: 100%;
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 12vw;
+  max-width: 160px; /* Prevent the logo from becoming too large */
+}
+
+.nav-links {
+  display: flex;
+  gap: 2vw;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2vw;
+  font-weight: 600;
+  padding: 0.5vw 1vw;
+  transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #6a1b9a;
+}
+
+.nav-links a.active {
+  color: #6a1b9a;
+  border-bottom: 0.3vw solid #6a1b9a;
+  padding-bottom: 0.5vw;
+}
+
+.sign-out {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2vw;
+  cursor: pointer;
+  font-weight: bold;
+  color: red;
+  transition: color 0.3s ease-in-out;
+  padding: 0.5vw 1vw;
+}
+
+.sign-out:hover {
+  color: darkred;
+}
+
+/* =============================== */
+/* Dashboard Page Layout */
+/* =============================== */
+
+.dashboard-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.dashboard-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #6a1b9a;
+}
+
+.analytics-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.analytics-box {
+  background: linear-gradient(135deg, #a4508b, #5f0a87);
+  width: 280px;
+  height: 180px;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.analytics-box h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #f3d1ff;
+}
+
+.analytics-box p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.revenue-box {
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+}
+
+/* =============================== */
+/* QUESTIONS PAGE LAYOUT */
+/* =============================== */
+
+/* Flex container for the two main sections: Questions Input and Questions Image Input.
+   The flex settings ensure that both “tables” are equally sized.
+*/
+.questions-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  max-width: 2000px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+/* =============================== */
+/* COMMON STYLING FOR BOTH INPUT CONTAINERS */
+/* =============================== */
+
+/* Both the Questions Input and Questions Image Input share these properties so they appear as equally sized “tables”. */
+.questions-input,
+.questions-image-input {
+  flex: 1 1 45%; /* Each takes up about 45% of the row; adjust as needed */
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 10px;
+  border-top: 5px solid #6a1b9a;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  
+  /* Enhanced Box-Shadow for a Modern Look */
+  box-shadow: 0 6px 15px rgba(3, 3, 3, 0.15), 
+              0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Subtle Hover Effect */
+.questions-input:hover,
+.questions-image-input:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(3, 3, 3, 0.15), 
+              0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================== */
+/* QUESTIONS INPUT FORM STYLING */
+/* =============================== */
+
+/* Category selection row: aligns the dropdown and multiple-choice checkbox side by side */
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.category-row label {
+  white-space: nowrap; /* Prevent label text from wrapping */
+}
+
+.category-row select {
+  flex-grow: 0;
+  width: 180px; /* Fixed width for consistency */
+  height: 35px;
+  padding: 5px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* Styling for the multiple-choice checkbox label so text and checkbox stay together */
+.multiple-choice-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* Remove extra space and adjust alignment for the checkbox */
+#multipleChoice {
+  margin-left: 0;
+  width: auto;
+  transform: translateY(0px);
+}
+
+/* Form labels for the Questions Input container */
+.questions-input label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* Textarea and input fields styling for Questions Input */
+.questions-input textarea,
+.questions-input input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+}
+
+/* Buttons container for the Questions Input form */
+.form-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 0px;
+  padding-top: 10px;
+}
+
+.form-buttons button {
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.form-buttons button:hover {
+  background: linear-gradient(135deg, #005f99, #008a75);
+  transform: scale(1.05);
+}
+
+.btn-primary{
+  margin-left: 15px;
+  padding: 10px;
+  width: 150px;
+  border: none;
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.btn-primary:hover{
+  background: linear-gradient(135deg, #005f99, #008a75);
+  transform: scale(1.05);
+}
+
+
+/* Display area for dynamic questions list */
+#questionsDisplay {
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* =============================== */
+/* QUESTIONS IMAGE INPUT CONTAINER STYLING */
+/* =============================== */
+
+/* Additional styling for the Questions Image Input container that arranges its elements vertically */
+.questions-image-input {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between rows */
+}
+
+/* Each row within the image input container */
+.qi-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Fixed width for labels to align the inputs uniformly */
+.qi-label {
+  width: 30%;
+  font-weight: bold;
+  color: #333;
+  text-align: right;
+}
+
+/* Styling for text inputs and dropdowns inside the image input section */
+.qi-text-input,
+.qi-select {
+  width: 70%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* File upload input wrapper for consistent alignment */
+.qi-input-file-wrapper {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qi-input-file {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qi-file-status {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Image preview area styling */
+.qi-image-preview {
+  width: 70%;
+  min-height: 150px;
+  border: 2px dashed #6a1b9a;
+  background-color: #eef6fd;
+  color: #6a1b9a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  text-align: center;
+  padding: 0px;
+  font-weight: bold;
+}
+
+/* Container for person-specific fields (visible only when applicable) */
+.qi-person-fields {
+  margin-top: -10;
+  justify-content: space-around;
+}
+
+/* Individual person field container styling */
+.person-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.qi-label-field{
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Checkboxes row for person-related options */
+.qi-checkbox-row {
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+/* Styling for each checkbox label and input */
+.qi-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
+}
+
+.qi-checkbox-input {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Action buttons (Clear, Submit, etc.) */
+.qi-action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -15px;
+  padding-top: 10px;
+}
+
+.qi-action-buttons button{
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.qi-action-buttons button:hover{
+background: linear-gradient(135deg, #005f99, #008a75);
+transform: scale(1.05);
+}
+
+/* New Action buttons (Clear, Submit, etc.) */
+
+.qi-action-buttons-new {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -15px;
+  padding-top: 10px;
+}
+
+.qi-action-buttons-new button{
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.qi-action-buttons-new button:hover{
+background: linear-gradient(135deg, #005f99, #008a75);
+transform: scale(1.05);
+}
+
+
+.qi-button-db {
+  background-color: #0072bc;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  padding: 10px;
+}
+.qi-button-db:hover {
+  background-color: #005999;
+}
+
+/* Styling for the search results box */
+.qi-search-results {
+  width: 70%;
+  min-height: 100px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+/* Utility class to hide elements (used for person-specific fields) */
+.qi-hidden {
+  display: none;
+}
+
+.questions-input,
+.questions-image-input{
+  background-color: rgb(222, 227, 228);
+}
+
+.tags-sec{
+  margin-top: -0.6rem;
+}
+
+.tags-name{
+  color: #333;
+  font-weight: bold;
+}
+
+.tags-sec2{
+  margin-top: 11px;
+  font-weight: bold;
+  color: #333;
+}
+
+.tag{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  margin-top: 5px;
+}
+
+.category-row,
+.quest,
+.ans,
+.wrongans{
+  margin-top: 1rem;
+}
+
+.qi-hidden {
+  display: none;
+}
+.qi-row {
+  margin-bottom: 10px;
+}
+
+.qi-person-field {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* styles for the new section */
+
+.new-name{
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 5rem;
+}
+
+.form-row .qi-text-input{
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+}
+
+.new-form{
+  width: 40%;
+}
+
+.new-submit{
+  display: flex;
+}
+
+
+.btn-primary{
+  padding: 10px;
+  width: 150px;
+}
+
+.catName{
+  font-weight: bold;
+  margin-left: 230px;
+}
+
+.qi-image-preview-new{
+  width: 100%; 
+  padding: 100px;
+  min-height: 0px;
+  border: 2px dashed #6a1b9a;
+  background-color: #eef6fd;
+  color: #6a1b9a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.qi-action-buttons-new{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5px;
+  padding-top: 10px;
+}
+
+.qi-action-buttons-new button{
+  padding: 12px 18px;
+  border: none;
+  background: linear-gradient(135deg, #007adf, #00ecbc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.qi-action-buttons button:hover{
+background: linear-gradient(135deg, #005f99, #008a75);
+transform: scale(1.05);
+}
+
+
+
+/* =============================== */
+/* Responsive Adjustments */
+/* =============================== */
+
+/* For screens smaller than 768px, stack elements vertically */
+@media (max-width: 768px) {
+  .qi-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .qi-label {
+    width: 100%;
+    text-align: left;
+  }
+
+  .qi-text-input,
+  .qi-select,
+  .qi-input-file-wrapper,
+  .qi-image-preview,
+  .qi-search-results {
+    width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* JavaScript: Dynamic Behavior for Image Category Selection */
+/* ----------------------------------------------------------------------------------- */
+
+/* 
+  This script toggles the visibility of person-specific fields based on the selected image category.
+  When "person" is selected, both the person fields and the related checkboxes are shown.
+*/
+
+/* const imageCategorySelect = document.getElementById('imageCategory');
+const personFields = document.getElementById('personFields');
+const personCheckboxes = document.getElementById('personCheckboxes');
+
+imageCategorySelect.addEventListener('change', () => {
+  if (imageCategorySelect.value === 'person') {
+    // Show person-specific fields when category is "person"
+    personFields.classList.remove('qi-hidden');
+    personCheckboxes.classList.remove('qi-hidden');
+  } else {
+    // Hide person-specific fields for other categories
+    personFields.classList.add('qi-hidden');
+    personCheckboxes.classList.add('qi-hidden');
+  }
+});
+ */

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Specify character encoding -->
+  <meta charset="UTF-8">
+  <!-- Set viewport for responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Page title -->
+  <title>Questions</title>
+  <!-- Link to external CSS file for styling -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- 
+    NOTE: Any additional meta tags or external libraries can be linked here.
+    For example, if you use JavaScript, you might include a <script> tag with the "defer" attribute.
+  -->
+</head>
+<body>
+  <!-- ============================================================
+       HEADER: Top Navigation Bar
+       This section contains the logo, navigation links, and a sign-out button.
+       ============================================================ -->
+  <header class="top-nav">
+    <!-- Logo Container -->
+    <div class="logo-container">
+      <!-- Logo Image: Ensure that the alt text describes the image for accessibility -->
+      <img src="logo_gradient.png" alt="Company Logo" class="logo">
+    </div>
+
+    <!-- Navigation Links: Wrap in <nav> for semantic clarity -->
+    <nav class="nav-links">
+      <!-- The 'active' class marks the current page (Questions) -->
+      <a href="#">Home</a>
+      <a href="#" class="active">Questions</a>
+      <a href="#">Quizzes</a>
+      <a href="#">Users</a>
+      <a href="#">Venues</a>
+      <a href="#">Hosts</a>
+      <a href="#">Billing</a>
+      <a href="#">Analytics</a>
+    </nav>
+
+    <!-- Sign Out Button -->
+    <button class="sign-out">Sign Out</button>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT: Questions and Image Input Section
+       This section is divided into two main parts:
+       1. The Questions Input Form (Left Section)
+       2. The Questions Image Input (Right Section)
+       ============================================================ -->
+  <main class="questions-container">
+    <!-- ------------------------------------------------------------
+         LEFT SECTION: Questions Input Form
+         ------------------------------------------------------------ -->
+    <section class="questions-input">
+      <!-- Display the count of questions in the selected category -->
+      <p class="question-count">
+        <strong>Questions in Category:</strong> <span id="questionCount">0</span>
+      </p>
+
+      <!-- Begin Form for Submitting/Editing Questions -->
+      <!-- Added an ID to allow JavaScript manipulation if needed -->
+      <form id="questionForm">
+        <!-- 
+          ROW: Category selection and multiple choice checkbox.
+          Both inputs are placed on the same row for a compact layout.
+        -->
+        <div class="form-row category-row">
+          <!-- Label and Dropdown for Category Selection -->
+          <label for="category">Select Category:</label>
+          <select id="category" name="category" class="qi-select">
+            <!-- Updated option values to be unique and descriptive -->
+            <option value="american-history">American History</option>
+            <option value="geography">Geography</option>
+            <option value="sports">Sports</option>
+            <option value="science-tech">Science &amp; Tech</option>
+            <option value="arts-literature">Arts &amp; Literature</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="nature">Nature</option>
+            <option value="world-history">World History</option>
+            <option value="music-rounds">Music Rounds</option>
+            <option value="feud">Feud</option>
+            <option value="wager-round">Wager Round</option>
+            <option value="movies">Movies</option>
+            <option value="add-category">Add Category</option>
+          </select>
+
+          <!-- Checkbox for "Multiple Choice Only" option -->
+          <label for="multipleChoice" class="multiple-choice-label">Multiple Choice Only:</label>
+          <input type="checkbox" id="multipleChoice" name="multipleChoice">
+        </div>
+
+        <!-- ROW: Question Text Input -->
+        <div class="form-row quest">
+          <label for="questionText">Enter Question:</label>
+          <textarea id="questionText" name="questionText" placeholder="Type your question here..." rows="4"></textarea>
+        </div>
+
+        <!-- ROW: Correct Answer Input -->
+        <div class="form-row ans">
+          <label for="answer">Correct Answer:</label>
+          <input type="text" id="answer" name="answer" placeholder="Enter the correct answer">
+        </div>
+
+        <!-- ROW: Wrong Answers Input -->
+        <div class="form-row">
+          <label for="wrongAnswers wrongans">Wrong Answers:</label>
+          <input type="text" id="wrongAnswers" name="wrongAnswers" placeholder="Enter wrong answers, separated by commas">
+        </div>
+
+        <!-- ROW: Tags Input -->
+        <div class="form-row">
+          <label for="tags">Tags:</label>
+          <input type="text" id="tags" name="tags" placeholder="Enter tags, separated by commas">
+        </div>
+
+        <!-- ROW: Action Buttons for the Form -->
+        <div class="form-buttons">
+          <!-- Clear button resets the form (handled by JavaScript if needed) -->
+          <button type="button" id="clearForm">Clear</button>
+          <!-- Edit button can be used to load existing question details for editing -->
+          <button type="button" id="editQuestion">Edit</button>
+          <!-- Submit button sends the form data -->
+          <!-- <button type="submit">Submit</button> -->
+        </div>
+
+        <!-- ROW: Search Questions -->
+        <div class="form-row">
+          <label for="searchQuestions">Search Questions:</label>
+          <input type="text" id="searchQuestions" name="searchQuestions" placeholder="Search existing questions...">
+        </div>
+
+        <!-- ROW: Display Area for Dynamically Loaded Questions -->
+        <div id="questionsDisplay">
+          <!-- This area will be populated dynamically (e.g., via JavaScript) -->
+        </div>
+      </form>
+    </section>
+
+    <!-- ------------------------------------------------------------
+         RIGHT SECTION: Questions Image Input
+         ------------------------------------------------------------ -->
+    <section class="questions-image-input" id="quest-section" type="hidden">
+      <!-- ROW 1: File Upload for an Image -->
+      <div class="qi-row">
+        <label for="imageUpload" class="qi-label">Upload an Image:</label>
+        <div class="qi-input-file-wrapper">
+          <!-- Image file input: accepts image types only -->
+          <input type="file" id="imageUpload" name="imageUpload" accept="image/*" class="qi-input-file">
+          <!-- Span to display the status (e.g., "No file chosen") -->
+          <span class="qi-file-status">No file chosen</span>
+        </div>
+      </div>
+
+      <!-- ROW 1a: Button to Choose an Image from the Database -->
+      <div class="qi-row">
+        <div class="qi-label">Or from Database:</div>
+        <button type="button" id="chooseFromDB" class="qi-button qi-button-db">
+          Choose from DB
+        </button>
+      </div>
+
+      <!-- ROW 2: Image Preview/Drag & Drop Area -->
+      <div class="qi-row">
+        <label for="imagePreview" class="qi-label">Preview:</label>
+        <div id="imagePreview" class="qi-image-preview">
+          <!-- Instructions for drag and drop functionality -->
+          Drag and drop an image here or select a file to upload.
+        </div>
+      </div>
+
+      <!-- ROW 3: Image Category Selection -->
+      <div class="qi-row">
+        <label for="imageCategory" class="qi-label">Select Category:</label>
+        <select id="imageCategory" name="imageCategory" class="qi-select">
+          <option value="zero" selected></option>
+          <option value="character">Character</option>
+          <option value="person">Person</option>
+          <option value="place">Place</option>
+          <option value="thing">Thing</option>
+        </select>
+      </div>
+
+      <!-- ROW 4: Person Information Fields (Visible Only When "Person" is Selected) -->
+
+      <div class="qi-row qi-person-fields qi-hidden" id="personFields">
+
+        <div class="check">
+          <label for="sports" class="qi-label-field">Sports:</label>
+          <input type="checkbox" id="sports" name="sports" class="person-field">
+        </div>
+        <div class="check">
+          <label for="entertainment" class="qi-label-field">Entertainment:</label>
+          <input type="checkbox" id="entertainment" name="entertainment" class="person-field">
+        </div>
+        <div class="check">
+          <label for="others" class="qi-label-field">Others:</label>
+          <input type="checkbox" id="others" name="others" class="person-field">
+        </div>
+
+        <!-- First Name Field -->
+        <div class="qi-person-field">
+          <label for="firstName" class="qi-label-field">First Name:</label>
+          <input type="text" id="firstName" name="firstName" class="person-field" placeholder="Enter first name">
+        </div>
+        <!-- Middle Name Field -->
+        <div class="qi-person-field">
+        <label for="MiddleName" class="qi-label-field">Middle Name:</label>
+        <input type="text" id="midName" name="midName" class="person-field" placeholder="Enter Middle name">
+      </div>
+        <!-- Last Name Field -->
+        <div class="qi-person-field">
+          <label for="lastName" class="qi-label-field">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" class="person-field" placeholder="Enter last name">
+        </div>
+        </div>
+
+        <!-- New Checkboxes -->
+        <div class="qi-row qi-person-fields qi-hidden1" id="charFields">
+                   <div class="check-new" style="display: block;">
+                    <label for="movie" class="qi-label-field">Movie:</label>
+                    <input type="checkbox" id="movie" name="movie" class="person-field">
+                  </div>
+                  <div class="check-new" style="display: block;">
+                    <label for="telev" class="qi-label-field">TV:</label>
+                    <input type="checkbox" id="telev" name="telev" class="person-field">
+                  </div>
+                  <div class="check-new" style="display: block;">
+                    <label for="cart" class="qi-label-field">Cartoon:</label>
+                    <input type="checkbox" id="cart" name="cart" class="person-field">
+                  </div>
+        
+                <!-- First Name Field -->
+                <div class="qi-person-field">
+                  <label for="firstName" class="qi-label-field">First Name:</label>
+                  <input type="text" id="firstName" name="firstName" class="person-field" placeholder="Enter first name">
+                </div>
+                <!-- Middle Name Field -->
+                <div class="qi-person-field">
+                <label for="MiddleName" class="qi-label-field">Middle Name:</label>
+                <input type="text" id="midName" name="midName" class="person-field" placeholder="Enter Middle name">
+              </div>
+                <!-- Last Name Field -->
+                <div class="qi-person-field">
+                  <label for="lastName" class="qi-label-field">Last Name:</label>
+                  <input type="text" id="lastName" name="lastName" class="person-field" placeholder="Enter last name">
+                </div>
+          </div>
+      
+      <div class="form-row tags-sec">
+        <label for="tags" style="color: #333; font-weight: bold;">Tags:</label>
+        <input type="text" id="tags" class="tag" name="tags" placeholder="Enter tags, separated by commas">
+      </div>
+
+      <!-- ROW 5: Person-Related Checkboxes (Visible Only When "Person" is Selected) -->
+      <div class="qi-row qi-checkbox-row qi-hidden" id="personCheckboxes">
+        <!-- Checkbox for "Sports" -->
+        <label class="qi-checkbox-label">
+          Sports
+          <input type="checkbox" id="sportsCheckbox" name="sports" class="qi-checkbox-input">
+        </label>
+        <!-- Checkbox for "Entertainment" -->
+        <label class="qi-checkbox-label">
+          Entertainment
+          <input type="checkbox" id="entertainmentCheckbox" name="entertainment" class="qi-checkbox-input">
+        </label>
+        <!-- Checkbox for "Public Figure" -->
+        <label class="qi-checkbox-label">
+          Public Figure
+          <input type="checkbox" id="publicFigureCheckbox" name="publicFigure" class="qi-checkbox-input">
+        </label>
+      </div>
+
+      <!-- ROW 6: Action Buttons for Image Input -->
+      <div class="qi-row qi-action-buttons">
+        <!-- Button to clear the image input form -->
+        <button type="button" id="clearImageForm" class="qi-button qi-button-clear">Clear</button>
+        <!-- Edit button can be used to load existing question details for editing -->
+        <button type="button" id="editQuestion" class="qi-button qi-button-edit">Edit</button>
+        <!-- Button to submit/upload the selected image -->
+        <button type="submit" id="uploadImage" class="qi-button qi-button-submit">Submit</button>
+      </div>
+
+      <!-- ROW 7: Search for Uploaded Images -->
+      <div class="qi-row">
+        <label for="searchImages" class="qi-label">Search Images:</label>
+        <input type="text" id="searchImages" name="searchImages" class="qi-text-input" placeholder="Search uploaded images...">
+      </div>
+
+      <!-- ROW 8: Display Image Search Results -->
+      <div class="qi-row">
+        <label for="imageSearchResults" class="qi-label">Search Results:</label>
+        <div id="imageSearchResults" class="qi-search-results">
+          <!-- This container will be dynamically populated with image search results -->
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <style>
+
+</style>
+
+<script src="script.js" defer></script>
+
+  <!-- ============================================================
+       OPTIONAL: Include JavaScript Files Here
+       If you have JavaScript that handles form submissions,
+       dynamic content updates, drag-and-drop functionality, etc.,
+       include it with the "defer" attribute to improve performance.
+       ============================================================ -->
+
+</body>
+</html>
